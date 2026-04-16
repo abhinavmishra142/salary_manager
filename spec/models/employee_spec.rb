@@ -2,14 +2,8 @@
 require 'rails_helper'
 
 RSpec.describe Employee, type: :model do
-  it "is valid with valid attributes" do
-    employee = Employee.new(
-      first_name: "John",
-      last_name: "Doe",
-      job_title: "Engineer",
-      country: "India",
-      salary: 50000
-    )
+  it "creates valid employee via factory" do
+    employee = build(:employee)
     expect(employee).to be_valid
   end
 

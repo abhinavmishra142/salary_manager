@@ -99,6 +99,13 @@ GEM
     erubi (1.13.1)
     et-orbi (1.4.0)
       tzinfo
+    factory_bot (6.5.6)
+      activesupport (>= 6.1.0)
+    factory_bot_rails (6.5.1)
+      factory_bot (~> 6.5)
+      railties (>= 6.1.0)
+    faker (3.7.1)
+      i18n (>= 1.8.11, < 2)
     fugit (1.12.1)
       et-orbi (~> 1.4)
       raabro (~> 1.4)
@@ -352,6 +359,8 @@ DEPENDENCIES
   bootsnap
   brakeman
   debug
+  factory_bot_rails
+  faker
   kamal
   puma (>= 5.0)
   rails (~> 8.0.5)
