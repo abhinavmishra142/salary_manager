@@ -1,24 +1,253 @@
-# README
+# 💼 Salary Manager – Full Stack Application
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A minimal yet scalable salary management system built for an organization with 10,000 employees.
+This application allows HR managers to manage employees and gain salary insights through an interactive UI.
 
-Things you may want to cover:
+---
 
-* Ruby version
+## 🚀 Features
 
-* System dependencies
+### 👥 Employee Management
 
-* Configuration
+* Add, view, update, and delete employees
+* Fields:
 
-* Database creation
+  * Full Name
+  * Job Title
+  * Country
+  * Salary
 
-* Database initialization
+---
 
-* How to run the test suite
+### 📊 Salary Insights
 
-* Services (job queues, cache servers, search engines, etc.)
+* Minimum, Maximum, Average salary by country
+* Average salary by Job Title within a country
+* Employee count per country
 
-* Deployment instructions
+---
 
-* ...
+### 🎨 Frontend (React)
+
+* Built using React inside Rails
+* Material UI for clean UI components
+* API-driven insights dashboard
+
+---
+
+## 🏗️ Tech Stack
+
+### Backend
+
+* Ruby on Rails 8 (API mode)
+* SQLite (can be replaced with PostgreSQL)
+* RSpec for testing
+
+### Frontend
+
+* React (integrated using esbuild)
+* Material UI (MUI)
+* Axios (API calls)
+
+### Tooling
+
+* jsbundling-rails (esbuild)
+* Node.js (v18+ recommended)
+* npm
+
+---
+
+## 🧠 Architecture Overview
+
+* Rails API handles:
+
+  * Employee CRUD
+  * Salary Insights APIs
+* React UI consumes APIs
+* esbuild bundles frontend assets
+* Static assets served via Rails API configuration
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1️⃣ Clone Repository
+
+```bash
+git clone <repo-url>
+cd salary_manager
+```
+
+---
+
+### 2️⃣ Install Dependencies
+
+#### Backend
+
+```bash
+bundle install
+```
+
+#### Frontend
+
+```bash
+npm install
+```
+
+---
+
+### 3️⃣ Setup Database
+
+```bash
+rails db:create
+rails db:migrate
+```
+
+---
+
+### 4️⃣ Seed Data (10,000 Employees)
+
+```bash
+rails db:seed
+```
+
+👉 Generates employee names using:
+
+* `first_names.txt`
+* `last_names.txt`
+
+---
+
+### 5️⃣ Run Application
+
+```bash
+./bin/dev
+```
+
+App will be available at:
+
+```
+http://localhost:3000
+```
+
+---
+
+## 🧪 Running Tests
+
+```bash
+bundle exec rspec
+```
+
+✔ Includes:
+
+* Model tests
+* Controller tests
+* Edge case validations
+
+---
+
+## 📡 API Endpoints
+
+### Get Country Insights
+
+```
+GET /insights/country?country=India
+```
+
+Response:
+
+```json
+{
+  "min": 30000,
+  "max": 120000,
+  "avg": 65000,
+  "count": 2500
+}
+```
+
+---
+
+### Get Job Insights
+
+```
+GET /insights/job?country=India&job_title=Engineer
+```
+
+Response:
+
+```json
+{
+  "avg": 75000
+}
+```
+
+---
+
+## 🧪 Edge Cases Handled
+
+* No employees found
+* Invalid or missing parameters
+* Empty dataset handling
+* API error handling in UI
+
+---
+
+## ⚡ Performance Considerations
+
+* Efficient ActiveRecord queries using:
+
+  * `minimum`
+  * `maximum`
+  * `average`
+  * `count`
+* Seed script optimized for bulk inserts
+* Designed to scale for 10,000+ employees
+
+---
+
+## 🤖 AI Usage
+
+AI tools were used to:
+
+* Generate test cases
+* Improve code structure and debugging
+
+
+---
+
+## 🧩 Trade-offs & Decisions
+
+* Used Rails API mode for lightweight backend
+* Integrated React inside Rails instead of separate app for simplicity
+* Used SQLite for quick setup (can be swapped with PostgreSQL)
+
+---
+
+## 🛠️ Known Improvements (Future Scope)
+
+* Pagination for employee listing
+* Authentication (HR login)
+* Advanced analytics (percentiles, trends)
+* Export reports (CSV/PDF)
+* Deployment (Render / Heroku / AWS)
+
+---
+
+## 📸 Screenshots
+
+### 🏠 Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### 🌍 Country Salary Insights
+![Country Insights](screenshots/country_insights.png)
+
+### 💼 Job Salary Insights
+![Job Insights](screenshots/job_insights.png)
+
+---
+
+## 👨‍💻 Author
+
+Abhinav Mishra
+
+---
