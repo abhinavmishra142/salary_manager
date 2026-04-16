@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   # root "posts#index"
   resources :employees
   get "/insights/country", to: "insights#country"
+  get "/insights/job", to: "insights#job"
 end
