@@ -12,4 +12,22 @@ RSpec.describe "Employees API", type: :request do
       expect(JSON.parse(response.body).length).to eq(3)
     end
   end
+
+  describe "POST /employees" do
+    it "creates an employee" do
+      params = {
+        employee: {
+          first_name: "John",
+          last_name: "Doe",
+          job_title: "Engineer",
+          country: "India",
+          salary: 50000
+        }
+      }
+
+      post "/employees", params: params
+
+      expect(response).to have_http_status(:created)
+    end
+  end
 end
