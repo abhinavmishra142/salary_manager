@@ -16,6 +16,9 @@ class EmployeesController < ApplicationController
   def update
     employee = Employee.find(params[:id])
 
+    return render json: { error: "Employee not found" }, status: :not_found unless employee
+
+
     if employee.update(employee_params)
       render json: employee
     else
@@ -25,6 +28,9 @@ class EmployeesController < ApplicationController
 
   def destroy
     employee = Employee.find(params[:id])
+    
+    return render json: { error: "Employee not found" }, status: :not_found unless employee
+
     employee.destroy
 
     head :no_content
