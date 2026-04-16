@@ -1,4 +1,5 @@
 // app/javascript/components/MetricsCard.jsx
+import React from "react";
 import { Card, CardContent, Typography } from "@mui/material";
 
 const MetricsCard = ({ title, value }) => {

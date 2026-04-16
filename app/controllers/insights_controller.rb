@@ -9,7 +9,8 @@ class InsightsController < ApplicationController
     render json: {
       min: employees.minimum(:salary),
       max: employees.maximum(:salary),
-      avg: employees.average(:salary).to_f
+      avg: employees.average(:salary).to_f,
+      count: employees.count
     }
   end
 

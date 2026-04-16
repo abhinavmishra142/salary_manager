@@ -1,4 +1,5 @@
 // app/javascript/components/JobInsights.jsx
+import React from "react";
 import { useState } from "react";
 import { TextField, Button, Box } from "@mui/material";
 import { getJobInsights } from "../services/api";

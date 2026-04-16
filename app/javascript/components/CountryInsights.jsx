@@ -1,4 +1,5 @@
 // app/javascript/components/CountryInsights.jsx
+import React from "react";
 import { useState } from "react";
 import { TextField, Button, Box } from "@mui/material";
 import { getCountryInsights } from "../services/api";

@@ -1,0 +1,15 @@
+<!-- app/views/layouts/application.html.erb -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SalaryManager</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <script src="/assets/builds/application.js" type="module"></script>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>
