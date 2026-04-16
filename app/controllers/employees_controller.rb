@@ -13,6 +13,23 @@ class EmployeesController < ApplicationController
     end
   end
 
+  def update
+    employee = Employee.find(params[:id])
+
+    if employee.update(employee_params)
+      render json: employee
+    else
+      render json: { errors: employee.errors }, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    employee = Employee.find(params[:id])
+    employee.destroy
+
+    head :no_content
+  end
+
   private
 
   def employee_params

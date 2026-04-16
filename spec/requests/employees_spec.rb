@@ -30,4 +30,24 @@ RSpec.describe "Employees API", type: :request do
       expect(response).to have_http_status(:created)
     end
   end
+
+  describe "PATCH /employees/:id" do
+    it "updates employee" do
+      employee = create(:employee)
+
+      patch "/employees/#{employee.id}", params: { employee: { salary: 70000 } }
+
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
+  describe "DELETE /employees/:id" do
+    it "deletes employee" do
+      employee = create(:employee)
+
+      delete "/employees/#{employee.id}"
+
+      expect(response).to have_http_status(:no_content)
+    end
+  end
 end
