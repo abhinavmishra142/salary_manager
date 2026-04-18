@@ -224,7 +224,6 @@ Response:
 
 ## 🛠️ Known Improvements (Future Scope)
 
-* Pagination for employee listing
 * Authentication (HR login)
 * Advanced analytics (percentiles, trends)
 * Export reports (CSV/PDF)
