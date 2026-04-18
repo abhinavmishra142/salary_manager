@@ -15,11 +15,13 @@ import {
 const Employees = () => {
   const [employees, setEmployees] = useState([]);
   const [form, setForm] = useState({
-    full_name: "",
+    first_name: "",
+    last_name: "",
     job_title: "",
     country: "",
     salary: ""
   });
+  const [editingEmployee, setEditingEmployee] = useState(null);
 
   const [page, setPage] = useState(1);
 
@@ -36,6 +38,13 @@ const Employees = () => {
   const handleCreate = async () => {
     await axios.post("/employees", { employee: form });
     fetchEmployees();
+    resetForm();
+  };
+
+  const handleUpdate = async () => {
+    await axios.put(`/employees/${editingEmployee.id}`, { employee: form });
+    fetchEmployees();
+    resetForm();
   };
 
   const handleDelete = async (id) => {
@@ -43,17 +52,47 @@ const Employees = () => {
     fetchEmployees();
   };
 
+  const handleEdit = (emp) => {
+    const [first, last] = emp.full_name.split(' ');
+    setForm({
+      first_name: first || '',
+      last_name: last || '',
+      job_title: emp.job_title,
+      country: emp.country,
+      salary: emp.salary
+    });
+    setEditingEmployee(emp);
+  };
+
+  const resetForm = () => {
+    setForm({
+      first_name: "",
+      last_name: "",
+      job_title: "",
+      country: "",
+      salary: ""
+    });
+    setEditingEmployee(null);
+  };
+
   return (
     <Box mt={4}>
       <h2>Employees</h2>
 
-      <TextField label="First Name" onChange={(e) => setForm({ ...form, first_name: e.target.value })} />
-      <TextField label="Last Name" onChange={(e) => setForm({ ...form, last_name: e.target.value })} />
-      <TextField label="Job Title" onChange={(e) => setForm({ ...form, job_title: e.target.value })} />
-      <TextField label="Country" onChange={(e) => setForm({ ...form, country: e.target.value })} />
-      <TextField label="Salary" onChange={(e) => setForm({ ...form, salary: e.target.value })} />
+      <TextField label="First Name" value={form.first_name} onChange={(e) => setForm({ ...form, first_name: e.target.value })} />
+      <TextField label="Last Name" value={form.last_name} onChange={(e) => setForm({ ...form, last_name: e.target.value })} />
+      <TextField label="Job Title" value={form.job_title} onChange={(e) => setForm({ ...form, job_title: e.target.value })} />
+      <TextField label="Country" value={form.country} onChange={(e) => setForm({ ...form, country: e.target.value })} />
+      <TextField label="Salary" value={form.salary} onChange={(e) => setForm({ ...form, salary: e.target.value })} />
 
-      <Button onClick={handleCreate}>Add Employee</Button>
+      <Button onClick={editingEmployee ? handleUpdate : handleCreate}>
+        {editingEmployee ? "Update Employee" : "Add Employee"}
+      </Button>
+      {editingEmployee && (
+        <Button onClick={resetForm} color="secondary">
+          Cancel
+        </Button>
+      )}
 
       {/* TABLE */}
       <Table>
@@ -75,6 +114,12 @@ const Employees = () => {
               <TableCell>{emp.country}</TableCell>
               <TableCell>{emp.salary}</TableCell>
               <TableCell>
+                <Button
+                  onClick={() => handleEdit(emp)}
+                  color="primary"
+                >
+                  Edit
+                </Button>
                 <Button
                   color="error"
                   onClick={() => handleDelete(emp.id)}

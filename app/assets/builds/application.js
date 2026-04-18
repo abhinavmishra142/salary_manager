@@ -46250,11 +46250,13 @@ To suppress this warning, you need to explicitly provide the \`palette.${key}Cha
   var Employees = () => {
     const [employees, setEmployees] = (0, import_react10.useState)([]);
     const [form, setForm] = (0, import_react10.useState)({
-      full_name: "",
+      first_name: "",
+      last_name: "",
       job_title: "",
       country: "",
       salary: ""
     });
+    const [editingEmployee, setEditingEmployee] = (0, import_react10.useState)(null);
     const [page, setPage] = (0, import_react10.useState)(1);
     const fetchEmployees = async (pageNumber = 1) => {
       const res = await axios_default.get(`/employees?page=${pageNumber}`);
@@ -46267,12 +46269,46 @@ To suppress this warning, you need to explicitly provide the \`palette.${key}Cha
     const handleCreate = async () => {
       await axios_default.post("/employees", { employee: form });
       fetchEmployees();
+      resetForm();
+    };
+    const handleUpdate = async () => {
+      await axios_default.put(`/employees/${editingEmployee.id}`, { employee: form });
+      fetchEmployees();
+      resetForm();
     };
     const handleDelete = async (id) => {
       await axios_default.delete(`/employees/${id}`);
       fetchEmployees();
     };
-    return /* @__PURE__ */ import_react10.default.createElement(Box_default, { mt: 4 }, /* @__PURE__ */ import_react10.default.createElement("h2", null, "Employees"), /* @__PURE__ */ import_react10.default.createElement(TextField_default, { label: "First Name", onChange: (e) => setForm({ ...form, first_name: e.target.value }) }), /* @__PURE__ */ import_react10.default.createElement(TextField_default, { label: "Last Name", onChange: (e) => setForm({ ...form, last_name: e.target.value }) }), /* @__PURE__ */ import_react10.default.createElement(TextField_default, { label: "Job Title", onChange: (e) => setForm({ ...form, job_title: e.target.value }) }), /* @__PURE__ */ import_react10.default.createElement(TextField_default, { label: "Country", onChange: (e) => setForm({ ...form, country: e.target.value }) }), /* @__PURE__ */ import_react10.default.createElement(TextField_default, { label: "Salary", onChange: (e) => setForm({ ...form, salary: e.target.value }) }), /* @__PURE__ */ import_react10.default.createElement(Button_default, { onClick: handleCreate }, "Add Employee"), /* @__PURE__ */ import_react10.default.createElement(Table_default, null, /* @__PURE__ */ import_react10.default.createElement(TableHead_default, null, /* @__PURE__ */ import_react10.default.createElement(TableRow_default, null, /* @__PURE__ */ import_react10.default.createElement(TableCell_default, null, "Name"), /* @__PURE__ */ import_react10.default.createElement(TableCell_default, null, "Job Title"), /* @__PURE__ */ import_react10.default.createElement(TableCell_default, null, "Country"), /* @__PURE__ */ import_react10.default.createElement(TableCell_default, null, "Salary"), /* @__PURE__ */ import_react10.default.createElement(TableCell_default, null, "Actions"))), /* @__PURE__ */ import_react10.default.createElement(TableBody_default, null, employees.map((emp) => /* @__PURE__ */ import_react10.default.createElement(TableRow_default, { key: emp.id }, /* @__PURE__ */ import_react10.default.createElement(TableCell_default, null, emp.full_name), /* @__PURE__ */ import_react10.default.createElement(TableCell_default, null, emp.job_title), /* @__PURE__ */ import_react10.default.createElement(TableCell_default, null, emp.country), /* @__PURE__ */ import_react10.default.createElement(TableCell_default, null, emp.salary), /* @__PURE__ */ import_react10.default.createElement(TableCell_default, null, /* @__PURE__ */ import_react10.default.createElement(
+    const handleEdit = (emp) => {
+      const [first, last] = emp.full_name.split(" ");
+      setForm({
+        first_name: first || "",
+        last_name: last || "",
+        job_title: emp.job_title,
+        country: emp.country,
+        salary: emp.salary
+      });
+      setEditingEmployee(emp);
+    };
+    const resetForm = () => {
+      setForm({
+        first_name: "",
+        last_name: "",
+        job_title: "",
+        country: "",
+        salary: ""
+      });
+      setEditingEmployee(null);
+    };
+    return /* @__PURE__ */ import_react10.default.createElement(Box_default, { mt: 4 }, /* @__PURE__ */ import_react10.default.createElement("h2", null, "Employees"), /* @__PURE__ */ import_react10.default.createElement(TextField_default, { label: "First Name", value: form.first_name, onChange: (e) => setForm({ ...form, first_name: e.target.value }) }), /* @__PURE__ */ import_react10.default.createElement(TextField_default, { label: "Last Name", value: form.last_name, onChange: (e) => setForm({ ...form, last_name: e.target.value }) }), /* @__PURE__ */ import_react10.default.createElement(TextField_default, { label: "Job Title", value: form.job_title, onChange: (e) => setForm({ ...form, job_title: e.target.value }) }), /* @__PURE__ */ import_react10.default.createElement(TextField_default, { label: "Country", value: form.country, onChange: (e) => setForm({ ...form, country: e.target.value }) }), /* @__PURE__ */ import_react10.default.createElement(TextField_default, { label: "Salary", value: form.salary, onChange: (e) => setForm({ ...form, salary: e.target.value }) }), /* @__PURE__ */ import_react10.default.createElement(Button_default, { onClick: editingEmployee ? handleUpdate : handleCreate }, editingEmployee ? "Update Employee" : "Add Employee"), editingEmployee && /* @__PURE__ */ import_react10.default.createElement(Button_default, { onClick: resetForm, color: "secondary" }, "Cancel"), /* @__PURE__ */ import_react10.default.createElement(Table_default, null, /* @__PURE__ */ import_react10.default.createElement(TableHead_default, null, /* @__PURE__ */ import_react10.default.createElement(TableRow_default, null, /* @__PURE__ */ import_react10.default.createElement(TableCell_default, null, "Name"), /* @__PURE__ */ import_react10.default.createElement(TableCell_default, null, "Job Title"), /* @__PURE__ */ import_react10.default.createElement(TableCell_default, null, "Country"), /* @__PURE__ */ import_react10.default.createElement(TableCell_default, null, "Salary"), /* @__PURE__ */ import_react10.default.createElement(TableCell_default, null, "Actions"))), /* @__PURE__ */ import_react10.default.createElement(TableBody_default, null, employees.map((emp) => /* @__PURE__ */ import_react10.default.createElement(TableRow_default, { key: emp.id }, /* @__PURE__ */ import_react10.default.createElement(TableCell_default, null, emp.full_name), /* @__PURE__ */ import_react10.default.createElement(TableCell_default, null, emp.job_title), /* @__PURE__ */ import_react10.default.createElement(TableCell_default, null, emp.country), /* @__PURE__ */ import_react10.default.createElement(TableCell_default, null, emp.salary), /* @__PURE__ */ import_react10.default.createElement(TableCell_default, null, /* @__PURE__ */ import_react10.default.createElement(
+      Button_default,
+      {
+        onClick: () => handleEdit(emp),
+        color: "primary"
+      },
+      "Edit"
+    ), /* @__PURE__ */ import_react10.default.createElement(
       Button_default,
       {
         color: "error",
