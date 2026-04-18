@@ -205,12 +205,11 @@ Response:
 
 ---
 
-## 🤖 AI Usage
+## 🧠 Engineering Artifacts
 
-AI tools were used to:
-
-* Generate test cases
-* Improve code structure and debugging
+- Planning Notes: docs/planning.md
+- Architecture: docs/architecture.md
+- AI Usage: docs/ai_usage.md
 
 
 ---
@@ -229,7 +228,16 @@ AI tools were used to:
 * Authentication (HR login)
 * Advanced analytics (percentiles, trends)
 * Export reports (CSV/PDF)
-* Deployment (Render / Heroku / AWS)
+
+---
+
+## 🚀 Live Demo
+
+🌐 Application URL: https://salary-manager-abhinav-1b0ca5a9d1d5.herokuapp.com/
+
+## 🎥 Video Demo
+
+📺 Watch Demo: https://drive.google.com/file/d/1XRzQF_pNX-CzHJB33_GhaW0n9Q1ZomF3/view
 
 ---
 
