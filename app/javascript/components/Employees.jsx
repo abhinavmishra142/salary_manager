@@ -1,7 +1,16 @@
 // app/javascript/components/Employees.jsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { TextField, Button, Box } from "@mui/material";
+import {
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Button,
+  Box,
+  TextField
+} from "@mui/material";
 
 const Employees = () => {
   const [employees, setEmployees] = useState([]);
@@ -38,19 +47,45 @@ const Employees = () => {
     <Box mt={4}>
       <h2>Employees</h2>
 
-      <TextField label="Name" onChange={(e) => setForm({ ...form, full_name: e.target.value })} />
-      <TextField label="Job" onChange={(e) => setForm({ ...form, job_title: e.target.value })} />
+      <TextField label="First Name" onChange={(e) => setForm({ ...form, first_name: e.target.value })} />
+      <TextField label="Last Name" onChange={(e) => setForm({ ...form, last_name: e.target.value })} />
+      <TextField label="Job Title" onChange={(e) => setForm({ ...form, job_title: e.target.value })} />
       <TextField label="Country" onChange={(e) => setForm({ ...form, country: e.target.value })} />
       <TextField label="Salary" onChange={(e) => setForm({ ...form, salary: e.target.value })} />
 
-      <Button onClick={handleCreate}>Add</Button>
+      <Button onClick={handleCreate}>Add Employee</Button>
 
-      {employees.map((emp) => (
-        <div key={emp.id}>
-          {emp.full_name} - {emp.job_title}
-          <Button onClick={() => handleDelete(emp.id)}>Delete</Button>
-        </div>
-      ))}
+      {/* TABLE */}
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Name</TableCell>
+            <TableCell>Job Title</TableCell>
+            <TableCell>Country</TableCell>
+            <TableCell>Salary</TableCell>
+            <TableCell>Actions</TableCell>
+          </TableRow>
+        </TableHead>
+
+        <TableBody>
+          {employees.map((emp) => (
+            <TableRow key={emp.id}>
+              <TableCell>{emp.full_name}</TableCell>
+              <TableCell>{emp.job_title}</TableCell>
+              <TableCell>{emp.country}</TableCell>
+              <TableCell>{emp.salary}</TableCell>
+              <TableCell>
+                <Button
+                  color="error"
+                  onClick={() => handleDelete(emp.id)}
+                >
+                  Delete
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
 
       <Box mt={2}>
         <Button

@@ -7,7 +7,7 @@ class EmployeesController < ApplicationController
 
     employees = Employee
                   .offset((page - 1) * per_page)
-                  .limit(per_page)
+                  .limit(per_page).order(id: :desc)
 
     render json: {
       employees: employees.as_json(methods: :full_name),
