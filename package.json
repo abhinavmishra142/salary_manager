@@ -11,6 +11,6 @@
     "esbuild": "^0.28.0"
   },
   "scripts": {
-    "build": "esbuild app/javascript/application.jsx --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets --loader:.js=jsx --jsx=automatic"
-  }
+  "build": "esbuild app/javascript/application.jsx --bundle --outdir=app/assets/builds"
+}
 }
