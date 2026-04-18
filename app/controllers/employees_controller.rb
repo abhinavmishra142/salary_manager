@@ -1,6 +1,19 @@
 class EmployeesController < ApplicationController
   def index
-    render json: Employee.all
+    page = params[:page].to_i || 1
+    per_page = 20
+
+    page = 1 if page <= 0
+
+    employees = Employee
+                  .offset((page - 1) * per_page)
+                  .limit(per_page)
+
+    render json: {
+      employees: employees.as_json(methods: :full_name),
+      page: page,
+      total_count: Employee.count
+    }
   end
 
   def create

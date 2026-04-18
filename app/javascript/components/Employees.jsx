@@ -12,13 +12,16 @@ const Employees = () => {
     salary: ""
   });
 
-  const fetchEmployees = async () => {
-    const res = await axios.get("/employees");
-    setEmployees(res.data);
+  const [page, setPage] = useState(1);
+
+  const fetchEmployees = async (pageNumber = 1) => {
+    const res = await axios.get(`/employees?page=${pageNumber}`);
+    setEmployees(res.data.employees);
+    setPage(res.data.page);
   };
 
   useEffect(() => {
-    fetchEmployees();
+    fetchEmployees(page);
   }, []);
 
   const handleCreate = async () => {
@@ -48,6 +51,19 @@ const Employees = () => {
           <Button onClick={() => handleDelete(emp.id)}>Delete</Button>
         </div>
       ))}
+
+      <Box mt={2}>
+        <Button
+          disabled={page === 1}
+          onClick={() => fetchEmployees(page - 1)}
+        >
+          Previous
+        </Button>
+
+        <Button onClick={() => fetchEmployees(page + 1)}>
+          Next
+        </Button>
+      </Box>
     </Box>
   );
 };
