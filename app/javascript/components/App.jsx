@@ -1,14 +1,27 @@
-// app/javascript/components/App.jsx
+import React, { useState } from "react";
+import { Container, Tabs, Tab, Box } from "@mui/material";
+import Employees from "./Employees";
 import CountryInsights from "./CountryInsights";
 import JobInsights from "./JobInsights";
-import { Container } from "@mui/material";
 
 const App = () => {
+  const [tab, setTab] = useState(0);
+
   return (
     <Container>
       <h1>Salary Dashboard</h1>
-      <CountryInsights />
-      <JobInsights />
+
+      <Tabs value={tab} onChange={(e, newValue) => setTab(newValue)}>
+        <Tab label="Employees" />
+        <Tab label="Country Insights" />
+        <Tab label="Job Insights" />
+      </Tabs>
+
+      <Box mt={3}>
+        {tab === 0 && <Employees />}
+        {tab === 1 && <CountryInsights />}
+        {tab === 2 && <JobInsights />}
+      </Box>
     </Container>
   );
 };
