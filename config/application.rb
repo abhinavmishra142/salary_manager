@@ -28,5 +28,10 @@ module SalaryManager
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    config.active_record.database_selector = nil
+    config.active_record.database_resolver = nil
+    config.active_record.database_resolver_context = nil
+    config.active_record.legacy_connection_handling = false
+    config.active_record.connects_to = { database: { writing: :primary } }
   end
 end
