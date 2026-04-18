@@ -1,4 +1,6 @@
 # spec/requests/insights_spec.rb
+require 'rails_helper'
+
 RSpec.describe "Insights API", type: :request do
   describe "GET /insights/country" do
     it "returns salary stats for a country" do

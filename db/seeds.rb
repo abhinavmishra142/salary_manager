@@ -22,8 +22,8 @@ employees = []
   employees << {
     first_name: first,
     last_name: last,
-    job_title: ["Engineer", "Manager", "HR"].sample,
-    country: ["India", "USA", "UK"].sample,
+    job_title: Faker::Job.title,
+    country: Faker::Address.country,
     salary: rand(30000..150000),
     created_at: Time.now,
     updated_at: Time.now
